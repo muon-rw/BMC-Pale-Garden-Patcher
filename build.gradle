@@ -193,7 +193,7 @@ jar.finalizedBy('reobfJarJar')
 task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     group = 'publishing'
     apiToken = System.getenv("CF_TOKEN")
-    //def mainFile = upload(1127963, jar)
+    def mainFile = upload(869750, jar)
     mainFile.displayName = "v${rootProject.version}-beta"
     mainFile.releaseType = "beta"
     mainFile.changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')

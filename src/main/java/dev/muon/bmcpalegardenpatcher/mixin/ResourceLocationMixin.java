@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(ResourceLocation.class)
 public class ResourceLocationMixin {
 
-    // that's one way to do it
+    // that's one way to do it. shoutout Noaaan
 
     @Shadow(remap = true)  /*lmao??*/
     protected static String[] decompose(String pLocation, char pSeparator) {
