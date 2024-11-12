@@ -130,12 +130,6 @@ dependencies {
         jarJar.ranged(it, "[${mixin_extras_version},)")
     }
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    // Dev Env
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
-    runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}")
-
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -196,69 +190,14 @@ reobf {
 
 jar.finalizedBy('reobfJarJar')
 
-tasks.register('sendToModpack', Copy) {
-    group = 'publishing'
-    dependsOn 'jarJar'
-    from tasks.jarJar.archiveFile
-    //wtf is a renpi
-    into 'C:/Users/renpi/curseforge/minecraft/Instances/Otherworld Early Access/mods'
-    rename { String fileName ->
-        fileName.replace(project.version.toString(), "dev")
-    }
-    doLast {
-        println "Mod JAR sent to modpack folder: ${tasks.jarJar.archiveFileName.get()}"
-    }
-}
-
 task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     group = 'publishing'
     apiToken = System.getenv("CF_TOKEN")
-    def mainFile = upload(1127963, jar)
+    //def mainFile = upload(1127963, jar)
     mainFile.displayName = "v${rootProject.version}-beta"
     mainFile.releaseType = "beta"
     mainFile.changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')
     mainFile.changelogType = "markdown"
     mainFile.addModLoader("Forge")
     mainFile.addGameVersion("1.20.1")
-    // Hard integrations
-    mainFile.addRequirement("origins-forge")
-    mainFile.addRequirement("pehkui")
-    mainFile.addRequirement("medieval-core-mod")
-    mainFile.addRequirement("ydms-mobhealthbar-mod")
-    mainFile.addRequirement("justleveling-fork")
-    mainFile.addRequirement("irons-spells-n-spellbooks")
-
-    // Could be made optional
-    mainFile.addRequirement("legendary-survival-overhaul")
-    mainFile.addRequirement("monobank")
-    mainFile.addRequirement("alexs-caves")
-    mainFile.addRequirement("alexs-mobs")
-    mainFile.addRequirement("apotheosis")
-    mainFile.addRequirement("backpacked")
-
-    // Icons only. lol. it is what it is
-    mainFile.addRequirement("create")
-    mainFile.addRequirement("supplementaries")
-    mainFile.addRequirement("mowzies-mobs")
-    mainFile.addRequirement("quark")
-    mainFile.addRequirement("apotheosis-ascended")
-    mainFile.addRequirement("ob-aquamirae")
-    mainFile.addRequirement("bosses-of-mass-destruction-forge")
-    mainFile.addRequirement("butchery")
-    mainFile.addRequirement("drink-beer-refill")
-    mainFile.addRequirement("eeeabs-mobs")
-    mainFile.addRequirement("eidolon-repraised")
-    mainFile.addRequirement("endremastered")
-    mainFile.addRequirement("fantasy-armor")
-    mainFile.addRequirement("fantasys-furniture")
-    mainFile.addRequirement("farmers-delight")
-    mainFile.addRequirement("ice-and-fire-dragons")
-    mainFile.addRequirement("it-takes-a-pillage")
-    mainFile.addRequirement("lendercataclysm")
-    mainFile.addRequirement("mariums-soulslike-weaponry")
-    mainFile.addRequirement("minecells")
-    mainFile.addRequirement("oh-the-biomes-weve-gone")
-    mainFile.addRequirement("the-awakening-of-the-elder-souls")
-    mainFile.addRequirement("to-tweaks-irons-spells")
-    mainFile.addRequirement("valoria")
 }
