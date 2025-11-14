@@ -2,7 +2,7 @@
     "required": true,
     "package": "dev.muon.bmcpalegardenpatcher.mixin",
     "compatibilityLevel": "JAVA_17",
-    "refmap": "otherworldapoth.refmap.json",
+    "refmap": "bmcpalegardenpatcher.refmap.json",
     "plugin": "dev.muon.bmcpalegardenpatcher.BMCPaleGardenPatcherMixinPlugin",
     "injectors": {
         "defaultRequire": 1

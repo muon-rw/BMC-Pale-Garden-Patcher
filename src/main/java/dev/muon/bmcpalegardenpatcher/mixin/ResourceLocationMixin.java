@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
+import static dev.muon.bmcpalegardenpatcher.BMCPaleGardenPatcher.ACTIVE_NAMESPACES;
+
 @Mixin(ResourceLocation.class)
 public class ResourceLocationMixin {
 
@@ -20,7 +22,7 @@ public class ResourceLocationMixin {
     @ModifyArg(method = "<init>(Ljava/lang/String;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/ResourceLocation;<init>([Ljava/lang/String;)V"))
     private static String[] remapIdentifier(String[] decomposed) {
         String fullId = decomposed[0] + ":" + decomposed[1];
-        if (fullId.startsWith("dtkupd:")) {
+        if (ACTIVE_NAMESPACES.contains(decomposed[0])) {
             String newId = BMCPaleGardenPatcher.remapIdentifier(fullId);
             return decompose(newId, ':');
         }

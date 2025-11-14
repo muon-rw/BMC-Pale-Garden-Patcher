@@ -23,6 +23,7 @@ public class BMCPaleGardenPatcherMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        BMCPaleGardenPatcher.LOGGER.info("Loading Pale Garden Remapper mixin: {}", mixinClassName);
         return true;
     }
 
