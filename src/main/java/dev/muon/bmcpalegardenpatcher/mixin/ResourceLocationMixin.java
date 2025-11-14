@@ -22,7 +22,6 @@ public class ResourceLocationMixin {
         String fullId = decomposed[0] + ":" + decomposed[1];
         if (fullId.startsWith("dtkupd:")) {
             String newId = BMCPaleGardenPatcher.remapIdentifier(fullId);
-            BMCPaleGardenPatcher.LOGGER.debug("Remapped identifier: {} -> {}", fullId, newId);
             return decompose(newId, ':');
         }
         return decomposed;

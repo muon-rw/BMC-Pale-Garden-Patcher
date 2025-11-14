@@ -72,14 +72,6 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        name = "JitPack"
-        url = 'https://jitpack.io'
-        content {
-            excludeGroup "io.github.edwinmindcraft"
-        }
-    }
-
-    maven {
         name = "Modrinth"
         url = "https://api.modrinth.com/maven"
         content {
@@ -108,7 +100,6 @@ repositories {
     maven {
         url = "https://jm.gserv.me/repository/maven-public/"
     }
-    maven { url = 'https://maven.greenhouseteam.dev/releases/' }
     maven { url = 'https://maven.theillusivec4.top' }
     maven { url "https://maven.isxander.dev/releases" }
     maven { url = "https://modmaven.dev"
@@ -194,7 +185,7 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
     group = 'publishing'
     apiToken = System.getenv("CF_TOKEN")
     def mainFile = upload(869750, jar)
-    mainFile.displayName = "v${rootProject.version}-beta"
+    mainFile.displayName = "v${rootProject.version}"
     mainFile.releaseType = "beta"
     mainFile.changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')
     mainFile.changelogType = "markdown"
